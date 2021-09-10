@@ -22,24 +22,40 @@ class LinkedList:
             curr = curr.next
         return result_str
 
-    def push(self, data):
+    def push(self, data, location=-1):
         curr = self.head
-        while curr.next:
+        if location == 0:
+            self.head = Node(data)
+            self.head.next = curr
+            return 
+
+        index = 0
+        while curr.next and not index == location - 1:
             curr = curr.next
-        curr.next = Node(data)
+            index += 1
             
+        new_node = Node(data)
+        new_node.next = curr.next
+        curr.next = new_node
+        
+if __name__ == '__main__':
+    # Link two different nodes.
+    node1 = Node(1)
+    node2 = Node(2)
+    node1.next = node2
+    linked_list = LinkedList(node1)
+    print(linked_list)
 
-# Link two different nodes.
-node1 = Node(1)
-node2 = Node(2)
-node1.next = node2
-linked_list = LinkedList(node1)
-print(linked_list)
+    # Add data to linked list. 
+    linked_list.push(3)
 
-# Add data to linked list. 
-linked_list.push(3)
-
-# Print data of linked list.
-print(linked_list)
-linked_list.push(4)
-print(linked_list)
+    # Print data of linked list.
+    print(linked_list)
+    linked_list.push(4)
+    print(linked_list)
+    linked_list.push(5, 0)
+    print(linked_list)
+    linked_list.push(6, 1)
+    print(linked_list)
+    linked_list.push(7, 3)
+    print(linked_list)
