@@ -3,4 +3,5 @@
 * Array
 * Queue
 * Stack 
+* Linked List
 ## Algorithms
