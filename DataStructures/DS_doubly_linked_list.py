@@ -7,6 +7,7 @@ class Node:
         self.next = next
         self.data = data
 
+
     def __str__(self):
         prev_addr = 'Null' if (self.prev == None) else hex(id(self.prev))
         next_addr = 'Null' if (self.next == None) else hex(id(self.next))
@@ -17,7 +18,8 @@ class DoublyLinkedList:
     def __init__(self, head=None):
         self.head = head
         self.tail = self.head
-        
+
+
     def __str__(self):
         curr = self.head
         
@@ -31,6 +33,7 @@ class DoublyLinkedList:
         result_str += ' ← tail'
         return result_str
     
+
     def push(self, data, location=-1):
         if not self.head:
             self.head = Node(data)
@@ -62,6 +65,7 @@ class DoublyLinkedList:
             new_node.next  = temp
             temp.prev = new_node
 
+
     def pop(self, location=-1):
         curr = self.head
         if not curr:
@@ -89,13 +93,49 @@ class DoublyLinkedList:
             del curr
             return 
 
-            
-    def remove(self, data):
-        pass
 
-    def indexOf(self, data):
-        pass
-        
+    def remove(self, data):
+        curr = self.head 
+        if not self.head:
+            print("Empty linked list.")
+            return
+        if self.head and self.head.data == data:
+            if self.tail == self.head:
+                self.head = None
+                self.tail = None
+                del curr 
+                return 
+            remove_node = self.head 
+            remove_node.next.prev = None
+            self.head = self.head.next
+            del remove_node
+            return 
+        if self.tail and self.tail.data == data:
+            remove_node = self.tail
+            remove_node.prev.next = None
+            self.tail = self.tail.prev
+            del remove_node
+            return
+        while curr.next: 
+            curr = curr.next
+            if curr.data == data:
+                curr.prev.next = curr.next
+                curr.next.prev = curr.prev
+                del curr
+                return 
+        print("Not Found!")
+            
+
+    def index_of(self, data):
+        curr = self.head
+        loc_index = 0
+        while curr:
+            if curr.data == data:
+                return loc_index
+            curr = curr.next
+            loc_index += 1
+        return "Not Found!"
+                   
 if __name__ == '__main__':
     def node_test():
         # Node test
@@ -105,18 +145,18 @@ if __name__ == '__main__':
         node1.next = node2
         node2.prev = node1
         node2.next = node3 
-        node3.prev = node2
-        
+        node3.prev = node2      
         # Node print test
         print(node1, node2, node3)
+
 
     def list_generation_test():
         # List generation test
         node1 = Node(1)
         doubly_linked_list = DoublyLinkedList(node1)
-        
         # List print test
         print(doubly_linked_list)
+
 
     def list_push_test():
         doubly_linked_list = DoublyLinkedList()
@@ -129,7 +169,8 @@ if __name__ == '__main__':
         doubly_linked_list.push(11, 0)
         doubly_linked_list.push(12)
         print(doubly_linked_list)
-    
+
+
     def list_pop_test():
         doubly_linked_list = DoublyLinkedList()
         for i in range(5):
@@ -148,7 +189,35 @@ if __name__ == '__main__':
         doubly_linked_list.pop(0)
         print(doubly_linked_list)
 
+
+    def list_remove_test():
+        doubly_linked_list = DoublyLinkedList()
+        for i in range(5):
+            doubly_linked_list.push(i)
+        print(doubly_linked_list)
+        doubly_linked_list.remove(9)
+        print(doubly_linked_list)
+        doubly_linked_list.remove(0)
+        print(doubly_linked_list)
+        doubly_linked_list.remove(4)
+        print(doubly_linked_list)
+        for i in range(1,4):
+            doubly_linked_list.remove(i)
+        print(doubly_linked_list)
+        doubly_linked_list.remove(1)
+
+
+    def list_index_of_test():
+        doubly_linked_list = DoublyLinkedList()
+        for i in range(5):
+            doubly_linked_list.push(i)
+        for i in range(1,7):
+            print('%s: %s'%(i, doubly_linked_list.index_of(i)))
+
+        
     # node_test()
     # list_generation_test()
     # list_push_test()
     # list_pop_test()
+    list_remove_test()
+    # list_index_of_test()
