@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 class Node: 
     def __init__(self, data, prev=None, next=None):
         self.prev = prev
@@ -42,11 +45,12 @@ class DoublyLinkedList:
             return 
 
         index = 0 
-        while curr.next and index < location - 1:
+        while curr.next:
+            if index >= location - 1 and not location == -1:
+                break
             curr = curr.next
             index += 1
-            print(curr)
-        
+    
         if curr == self.tail:
             curr.next = Node(data)
             self.tail = curr.next
@@ -93,10 +97,12 @@ if __name__ == '__main__':
 
     def list_push_test():
         doubly_linked_list = DoublyLinkedList()
-        for i in range(5):
+        for i in range(3):
             doubly_linked_list.push(i)
-        doubly_linked_list.push(3.5, 3)
         print(doubly_linked_list)
+        for i in range(4):
+            doubly_linked_list.push(i, 4-i)
+        print(doubly_linked_list)   
     
     # node_test()
     # list_generation_test()
