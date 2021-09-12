@@ -45,9 +45,7 @@ class DoublyLinkedList:
             return 
 
         index = 0 
-        while curr.next:
-            if index >= location - 1 and not location == -1:
-                break
+        while curr.next and not index == location - 1:
             curr = curr.next
             index += 1
     
@@ -65,8 +63,33 @@ class DoublyLinkedList:
             temp.prev = new_node
 
     def pop(self, location=-1):
-        pass
+        curr = self.head
+        if not curr:
+            print("EMPTY linked list.")
+            return 
+        if location == 0 or not curr.next:
+            self.head = curr.next
+            if not curr.next:
+                self.tail = self.head
+            else:
+                curr.next.prev = None
+            del curr
+            return 
 
+        index = 0
+        while curr.next and not index == location:
+            curr = curr.next
+            index += 1
+        if not curr.next:
+            curr.prev.next = curr.next
+            self.tail = curr.prev
+        else:
+            curr.prev.next = curr.next
+            curr.next.prev = curr.prev
+            del curr
+            return 
+
+            
     def remove(self, data):
         pass
 
@@ -103,7 +126,29 @@ if __name__ == '__main__':
         for i in range(4):
             doubly_linked_list.push(i, 4-i)
         print(doubly_linked_list)   
+        doubly_linked_list.push(11, 0)
+        doubly_linked_list.push(12)
+        print(doubly_linked_list)
     
+    def list_pop_test():
+        doubly_linked_list = DoublyLinkedList()
+        for i in range(5):
+            doubly_linked_list.push(i)
+        print(doubly_linked_list)
+        doubly_linked_list.pop(2)
+        print(doubly_linked_list)
+        doubly_linked_list.pop()
+        print(doubly_linked_list)
+        doubly_linked_list.pop(0)
+        print(doubly_linked_list)
+        doubly_linked_list.pop(1)
+        print(doubly_linked_list)
+        doubly_linked_list.pop(0)
+        print(doubly_linked_list)
+        doubly_linked_list.pop(0)
+        print(doubly_linked_list)
+
     # node_test()
     # list_generation_test()
-    list_push_test()
+    # list_push_test()
+    # list_pop_test()
