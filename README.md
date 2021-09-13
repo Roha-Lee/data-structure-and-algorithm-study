@@ -4,4 +4,6 @@
 * Queue
 * Stack 
 * Linked List
+  * Doubly Linked List
+* Hash Table
 ## Algorithms
