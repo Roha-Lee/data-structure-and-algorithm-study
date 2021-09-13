@@ -1,3 +1,5 @@
+import hashlib
+
 class HashTableChaining:
     def __init__(self, data, capacity=1000):
         self._capacity = capacity
@@ -10,7 +12,11 @@ class HashTableChaining:
     
 
     def _hash(self, key):
-        return hash(key) % self._capacity
+        # return hash(key) % self._capacity
+        hash_object = hashlib.sha256()
+        hash_object.update(key.encode())
+        hex_dig = hash_object.hexdigest()
+        return int(hex_dig, 16) % self._capacity
 
 
     def _check_and_insert(self, new_key, new_value):
@@ -48,12 +54,15 @@ class HashTableLinearProbing:
     
 
     def _hash(self, key):
-        return hash(key) % self._capacity
+        # return hash(key) % self._capacity
+        hash_object = hashlib.sha256()
+        hash_object.update(key.encode())
+        hex_dig = hash_object.hexdigest()
+        return int(hex_dig, 16) % self._capacity
 
 
     def _check_and_insert(self, new_key, new_value):
         addr = self._hash(new_key)
-        print(addr, new_key, new_value)
         if self.hash_table[addr]:
             if self.hash_table[addr][0] == new_key:
                 self.hash_table[addr] = (new_key, new_value)
@@ -125,5 +134,5 @@ if __name__ == '__main__':
 
 
 
-    # hash_table_chaining_test()
+    hash_table_chaining_test()
     hash_table_linear_probing_test()
