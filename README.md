@@ -6,4 +6,5 @@
 * Linked List
   * Doubly Linked List
 * Hash Table
+* Binary Search Tree
 ## Algorithms
