@@ -10,7 +10,7 @@ class Node:
     def __str__(self):
         left_addr = 'Null' if (self.left_child == None) else hex(id(self.left_child))
         right_addr = 'Null' if (self.right_child == None) else hex(id(self.right_child))
-        return "(%s←:%s:→%s)"%(left_addr, self.data, right_addr)
+        return '(%s←:%s:→%s)'%(left_addr, self.data, right_addr)
     
 
 class BinarySearchTree:
@@ -20,7 +20,7 @@ class BinarySearchTree:
     def __str__(self):
         curr = self.root
         if not curr:
-            return "EMPTY TREE"
+            return 'EMPTY TREE'
 
         def print_tree(flag, node, level, print_str):
             space = ' ' * (10 * level)

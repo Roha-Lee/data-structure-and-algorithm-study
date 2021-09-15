@@ -7,7 +7,6 @@ class Node:
         self.next = next
         self.data = data
 
-
     def __str__(self):
         prev_addr = 'Null' if (self.prev == None) else hex(id(self.prev))
         next_addr = 'Null' if (self.next == None) else hex(id(self.next))
@@ -18,7 +17,6 @@ class DoublyLinkedList:
     def __init__(self, head=None):
         self.head = head
         self.tail = self.head
-
 
     def __str__(self):
         curr = self.head
@@ -32,7 +30,6 @@ class DoublyLinkedList:
             curr = curr.next
         result_str += ' ← tail'
         return result_str
-    
 
     def push(self, data, location=-1):
         if not self.head:
@@ -65,7 +62,6 @@ class DoublyLinkedList:
             new_node.next  = temp
             temp.prev = new_node
 
-
     def pop(self, location=-1):
         curr = self.head
         if not curr:
@@ -92,7 +88,6 @@ class DoublyLinkedList:
             curr.next.prev = curr.prev
             del curr
             return 
-
 
     def remove(self, data):
         curr = self.head 
@@ -125,7 +120,6 @@ class DoublyLinkedList:
                 return 
         print("Not Found!")
             
-
     def index_of(self, data):
         curr = self.head
         loc_index = 0
