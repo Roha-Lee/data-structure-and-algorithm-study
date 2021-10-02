@@ -8,7 +8,13 @@ def binary_search(data, search):
     if data[mid] == search:
         return True
     return binary_search(data[:mid], search) or binary_search(data[mid+1:], search)
-    
+
+def sequential_search(data, search):
+    for datum in data:
+        if datum == search:
+            return True
+    return False
+
 if __name__ == '__main__':
     import random
     number_pool = list(range(300))
